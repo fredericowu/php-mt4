@@ -1,0 +1,171 @@
+<div class="container">
+
+	<div class="crypt-container">
+		<h2>Entrada</h2>
+		<form id="crypt-input" name="crypt-input">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto a ser encriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="crypt-input-text" name="crypt-input-text">
+			  </div>			  
+			</div>
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Chave a ser utilizada</label>
+			  <div class="col-10">
+			    <input class="form-control crypt-input-key" type="text" value="" name="crypt-input-key">
+			  </div>			  
+			</div>
+			
+	    	<div class="form-group row">
+			  <div class="col-10">
+			    <a id="btn-crypt" class="btn btn-sm btn-success" role="button">Encriptar</a>
+			  </div>			  
+			</div>
+					
+		</form>
+	</div>
+	
+	<div class="crypt-container">
+		<h2>Cifra de César</h2>
+		<form id="crypt-cesar" name="crypt-cesar">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto a ser desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="crypt-cesar-input-text" name="crypt-input-text">
+			  </div>
+			</div>
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Chave a ser utilizada</label>
+			  <div class="col-10">
+			    <input class="form-control crypt-input-key" type="text" value="" name="crypt-input-key">
+			  </div>			  
+			</div>			
+			
+	    	<div class="form-group row">
+			  <div class="col-10">
+			    <a id="btn-decrypt-cesar" class="btn btn-sm btn-success btn-decrypt" role="button">Desencriptar</a>
+			  </div>
+			</div>
+						
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="decrypt_cesar" name="crypt-input-text" disabled>
+			  </div>
+			</div>
+			
+			<input type="hidden" name="action" value="decrypt_cesar">
+					
+		</form>
+	</div>
+			
+	<div class="crypt-container">
+		<h2>AES256 com SALT</h2>
+		<form id="crypt-aes" name="crypt-aes">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto a ser desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="crypt-aes-input-text" name="crypt-input-text">
+			  </div>
+			</div>
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Chave a ser utilizada</label>
+			  <div class="col-10">
+			    <input class="form-control crypt-input-key" type="text" value="" name="crypt-input-key">
+			  </div>			  
+			</div>			
+			
+	    	<div class="form-group row">
+			  <div class="col-10">
+			    <a id="btn-decrypt-aes" class="btn btn-sm btn-success btn-decrypt" role="button">Desencriptar</a>
+			  </div>
+			</div>
+						
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="decrypt_aes" name="crypt-input-text" disabled>
+			  </div>
+			</div>
+			
+			<input type="hidden" name="action" value="decrypt_aes">
+					
+		</form>
+	</div>
+			
+	
+	<div class="crypt-container">
+		<h2>Triple DES</h2>
+		<form id="crypt-tripledes" name="crypt-tripledes">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto a ser desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="crypt-tripledes-input-text" name="crypt-input-text">
+			  </div>
+			</div>
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Chave a ser utilizada</label>
+			  <div class="col-10">
+			    <input class="form-control crypt-input-key" type="text" value="" name="crypt-input-key">
+			  </div>			  
+			</div>			
+			
+	    	<div class="form-group row">
+			  <div class="col-10">
+			    <a id="btn-decrypt-tripledes" class="btn btn-sm btn-success btn-decrypt" role="button">Desencriptar</a>
+			  </div>
+			</div>
+						
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto desencriptado</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="decrypt_tripledes" name="crypt-input-text" disabled>
+			  </div>
+			</div>
+			
+			<input type="hidden" name="action" value="decrypt_tripledes">					
+		</form>
+	</div>		
+
+</div>
+
+<script>
+
+	$(".btn-decrypt").on("click", function () {
+		var data = $(this).parent().parent().parent().serializeArray();
+		var key = data[1]["value"];
+		//alert(key)		
+		//$(".crypt-input-key").val( key );
+
+		show_output = function (data) {
+			for ( k in data ) {
+				//console.log( k );
+				$("#" + k ).val( data[k] );
+			}
+
+		}
+
+		
+		
+		api_call("api_crypt", "POST", data, show_output );
+	});
+	
+	$("#btn-crypt").on("click", function () {
+		show_output = function (data) {
+			$("#crypt-cesar-input-text").val( data["cesar"] );
+			$("#crypt-aes-input-text").val( data["aes"] );			
+			$("#crypt-tripledes-input-text").val( data["tripledes"] );			
+		}
+		
+		
+		var data = $("#crypt-input").serializeArray();
+		var key = data[1]["value"];
+		$(".crypt-input-key").val( key );
+		
+		api_call("api_crypt", "POST", data, show_output );
+		
+	});
+
+
+</script>
+

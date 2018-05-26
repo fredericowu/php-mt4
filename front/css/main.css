@@ -1,0 +1,40 @@
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+
+
+.modal-body {
+	padding: 30px;
+	
+}
+
+#modaldialog .modal-dialog {
+	width: 300px;
+}
+
+
+#modal_device .modal-dialog {
+	width: 500px;
+}
+
+
+#modal_ssh .modal-dialog {
+	width: 700px;
+}
+
+#output {
+	min-height: 150px;
+}
+
+.crypt-container, .hash-container {
+	padding-bottom: 30px;
+}
+.crypt-container form, .hash-container form {
+	width: 500px;
+	padding-left: 60px;
+}

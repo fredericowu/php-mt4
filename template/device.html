@@ -1,0 +1,263 @@
+<div class="container">
+  <h2>Dispositivos</h2>
+
+  <a id="btn-adicionar" class="btn btn-sm btn-success" role="button" data-toggle="modal" data-target="#modal-device">Adicionar</a>
+              
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Hostname</th>
+        <th>IP</th>
+        <th>Tipo</th>
+        <th>Fabricante</th>
+        <th>Modelo</th>
+        <th>Ativo/Inativo</th>
+        <th>Data Cadastro</th>        
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="device-body">
+
+    </tbody>
+  </table>
+</div>
+
+
+<!-- SSH Modal -->
+<div class="modal fade" id="modal-ssh" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SSH</h5>
+      </div>
+      <div class="modal-body">
+      	<form id="ssh-form" name="ssh-form">
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Hostname</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="ssh-hostname" name="hostname" disabled>
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Usuário</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="user" name="user">
+			  </div>
+			</div>
+			
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Senha</label>
+			  <div class="col-10">
+			    <input class="form-control" type="password" value="" id="pass" name="pass">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Comando</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="command" name="command">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Saida</label>
+			  <div class="col-10">
+			    <textarea class="form-control" id="output"></textarea>
+			  </div>
+			</div>
+			
+			<input type="hidden" name="action" value="ssh">
+			<input type="hidden" id="ssh-device-id" name="device_id" value="">
+
+     
+      	</form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="btn-ssh-execute" type="button" class="btn btn-success">Executar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Device Modal -->
+<div class="modal fade" id="modal-device" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Dispositivo</h5>
+      </div>
+      <div class="modal-body">
+      	<form id="device-form" name="device-form">
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Hostname</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="hostname" name="hostname">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">IP</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="ip" name="ip">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Tipo</label>
+			  <div class="col-10">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				  <label class="btn btn-primary active">
+				    <input type="radio" name="device_type_id" id="type1" value="1" autocomplete="off" checked> Servidor
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="device_type_id" id="type2" value="2" autocomplete="off"> Roteador
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="device_type_id" id="type3" value="3" autocomplete="off"> Switch
+				  </label>
+				  
+				</div>			  			    				
+			  </div>
+			</div>
+      	
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Fabricante</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="vendor" name="vendor">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Modelo</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="model" name="model">
+			  </div>
+			</div>
+
+	      	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Ativo/Inativo</label>
+			  <div class="col-10">
+				<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				  <label class="btn btn-primary active">
+				    <input type="radio" name="is_active" id="is_active1" value="1" autocomplete="off" checked> Ativo
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="is_active" id="is_active2"  value="0" autocomplete="off"> Inativo
+				  </label>
+				</div>			  			    
+			  </div>
+			</div>
+
+			<input type="hidden" name="action" value="add">
+
+      	</form>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button id="btn-device-submit" type="button" class="btn btn-success">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+	//DEVICE PAGE
+	$(function() {
+		load_device();	
+	});
+		
+	function load_device () {
+		
+		success_load = function ( data ) {
+			//console.log( data )
+			//alert("loaded");
+			
+			$("#device-body").html("");
+			
+			tipo = {
+					"1": "Servidor",
+					"2": "Roteador",					
+					"3": "Switch"					
+			}
+			
+			ativo = {
+				"1": "Ativo",
+				"0": "Inativo"					
+			}
+			
+			for (i in data["dataset"]) {
+				row = data["dataset"][i];
+				
+				newline = "<tr><td device-hostname-id='"+ row["device_id"]+ "'> " + row["hostname"] + 
+					"</td><td>" + row["ip"] + 
+					"</td><td>" + tipo[ row["device_type_id"] ]+ 
+					"</td><td>" + row["vendor"] + 
+					"</td><td>" + row["model"] + 
+					"</td><td>" + ativo[ row["is_active"] ] + 
+					"</td><td>" + row["datetime_creation"] + 
+					'</td><td><a class="btn btn-xs btn-primary device-ssh" title="SSH" role="button" data-toggle="modal" data-target="#modal-ssh" device-id="' + row["device_id"] + '">ssh</a> &nbsp;&nbsp;' +
+					'<a class="btn btn-xs btn-danger device-del" title="Excluir" role="button" device-id="' + row["device_id"] + '">excluir</a></td>';
+					
+				$("#device-body").html( $("#device-body").html() + newline );
+			}
+			
+			$(".device-del").on("click", function () {
+				var device_id = $( this ).attr("device-id");
+				//alert("del " + device_id);
+				api_call("api_device", "POST", { "action": "del", "device_id": device_id}, load_device );
+				
+			});
+			
+			$(".device-ssh").on("click", function () {
+				var device_id = $( this ).attr("device-id");				
+				var hostname = $("td[device-hostname-id="+ device_id+"]").html();
+				$("#ssh-hostname").val( hostname );
+				$("#ssh-device-id").val( device_id );
+				//alert("ssh " + device_id + hostname);
+				
+				
+			});
+			
+		}
+		error_load = function () {
+			
+		}
+		api_call("api_device", "GET", {}, success_load, error_load );	
+		
+	}
+
+	$("#btn-device-submit").on("click", function () {		
+		// console.log( $("#device-form").serializeArray() );
+
+		success_device = function () {
+			$("#modal-device").modal('toggle');
+			load_device();
+		}		
+		error_device = function () {
+			// alert("error");
+		}
+		
+		var data = $("#device-form").serializeArray();		
+		api_call("api_device", "POST", data, success_device, error_device );		
+	});
+	
+	$("#btn-ssh-execute").on("click", function () {
+		show_output = function (data) {
+			$("#output").html( data["output"] );			
+		}
+
+		var data = $("#ssh-form").serializeArray();		
+		api_call("api_device", "POST", data, show_output );		
+	});
+
+</script>
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="%SITE_TITLE%">
+    <meta name="author" content="Frederico Wu">
+
+    <title>%SITE_TITLE%</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="front/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="front/css/main.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">%SITE_TITLE%</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="/">Home</a></li>
+              <li><a view="crypt" class="load-view" href="#">Criptografia</a></li>
+              <li><a view="hash" class="load-view" href="#">Hashing</a></li>              
+              <li><a href="/docs/apresentacao.pptx">Apresentação</a></li>
+              <li><a href="/?view=ooohh_nao">404</a></li>
+<!--
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+               </li>
+-->               
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+      <div id="main">
+	      <div class="jumbotron hide" >
+	        <h1>Seja bem-vindo!</h1>
+	        <p>Por favor, faça o login para continuar.<br>
+	           Utilize o usuário: <b>demo</b> e senha <b>demo</b>
+	        </p>
+	        <p>
+	          <a id="btn-login" class="btn btn-lg btn-success" role="button" data-toggle="modal" data-target="#modaldialog">Login &raquo;</a>
+	        </p>
+	      </div>
+      </div>
+    </div> <!-- /container -->
+
+	
+	<!-- Login Modal -->
+	<div class="modal fade" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+	      </div>
+	      <div class="modal-body">
+	      	<form id="login-form">
+		      	<div class="form-group row">
+				  <label for="example-text-input" class="col-2 col-form-label">Usuário</label>
+				  <div class="col-10">
+				    <input class="form-control" type="text" value="" id="username">
+				  </div>
+				</div>
+				<div class="form-group row">
+				  <label for="example-password-input" class="col-2 col-form-label">Password</label>
+				  <div class="col-10">
+				    <input class="form-control" type="password" value="" id="password">
+				  </div>
+				</div>	      		
+	      	
+	      	</form>
+	        
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+	        <button id="btn-login-submit" type="button" class="btn btn-primary">Login</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+    <script src="front/js/jquery-3.3.1.min.js"></script>
+    <script src="front/bootstrap/js/bootstrap.min.js"></script>
+    <script src="front/js/main.js"></script>
+    <script>%LOAD_SCRIPT%</script>
+	<script>
+	
+	// MAIN PAGE
+	
+	$("#modaldialog").on("shown.bs.modal", function () {
+		  $("#username").trigger("focus");
+	});
+	
+	
+	$("#btn-login-submit").on("click", function () {
+		//var data = $("#login-form").serialize();
+		
+		var username = $("#username").val();
+		var password = $("#password").val();
+		
+		success_login = function () {
+			$("#modaldialog").modal('toggle');
+			load_view("device");
+		}
+		
+		error_login = function () {
+			
+		}
+		
+		api_call("api_auth", "POST", { "username": username, "password": password }, success_login, error_login );
+		
+	});
+		
+	</script>
+    
+  </body>
+</html>

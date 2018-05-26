@@ -1,0 +1,81 @@
+<div class="container">
+
+	<div class="hash-container">
+		<h2>Entrada</h2>
+		<form id="hash-input" name="hash-input">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Texto</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="hash-input-text" name="hash-input-text">
+			  </div>			  
+			</div>
+	    	<div class="form-group row">
+			  <div class="col-10">
+			    <a id="btn-hash" class="btn btn-sm btn-success" role="button">Gerar Hash</a>
+			  </div>			  
+			</div>
+					
+		</form>
+	</div>
+	
+	<div class="hash-container">
+		<h2>SHA512</h2>
+		<form id="hash-cesar" name="hash-cesar">
+
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Hash</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value=""  id="hash_sha512" name="hash-input-text">
+			  </div>
+			</div>
+					
+		</form>
+	</div>
+			
+	<div class="hash-container">
+		<h2>HMAC</h2>
+		<form id="hash-aes" name="hash-aes">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Hash</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="hash_hmac" name="hash-input-text">
+			  </div>
+			</div>			
+					
+		</form>
+	</div>
+			
+	
+	<div class="hash-container">
+		<h2>MD5</h2>
+		<form id="hash-tripledes" name="hash-tripledes">
+	    	<div class="form-group row">
+			  <label for="example-text-input" class="col-2 col-form-label">Hash</label>
+			  <div class="col-10">
+			    <input class="form-control" type="text" value="" id="hash_md5" name="hash-input-text">
+			  </div>
+			</div>			
+		</form>
+	</div>		
+
+</div>
+
+<script>
+	
+	$("#btn-hash").on("click", function () {
+		show_output = function (data) { 
+			for ( k in data ) {
+				//console.log( k );
+				$("#" + k ).val( data[k] );
+			}
+		}
+		
+		
+		var data = $("#hash-input").serializeArray();
+		api_call("api_hash", "POST", data, show_output );
+		
+	});
+
+
+</script>
+
